@@ -17,19 +17,35 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         </Routes> */}
 
         <Routes>
-          <Route path="/" element={<ManageRoutesPage />}>
-            {/* <Route index element={<ManageR />} />
-            <Route path="blogs" element={<Blogs />} />
-            <Route path="contact" element={<Contact />} />
-            <Route path="*" element={<NoPage />} /> */}
-          </Route>
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Routes>
 
-          <Route path="/dashboard" element={<Dashboard />}>
-            {/* <Route index element={<ManageR />} />
-            <Route path="blogs" element={<Blogs />} />
-            <Route path="contact" element={<Contact />} />
-            <Route path="*" element={<NoPage />} /> */}
-          </Route>
+        <Routes>
+          <Route
+            path="/dashboard/manage-routes"
+            element={<ManageRoutesPage />}
+          />
+        </Routes>
+
+        <Routes>
+          <Route
+            path="/dashboard/manage-vehicles"
+            element={<ManageRoutesPage />}
+          />
+        </Routes>
+
+        <Routes>
+          <Route
+            path="/dashboard/manage-bookings"
+            element={<ManageRoutesPage />}
+          />
+        </Routes>
+
+        <Routes>
+          <Route
+            path="/dashboard/manage-drivers"
+            element={<ManageRoutesPage />}
+          />
         </Routes>
       </BrowserRouter>
     </ChakraProvider>
