@@ -8,8 +8,8 @@ import {
   Td,
   VStack,
   Heading,
-  Center,
   Text,
+  HStack,
 } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { BACKEND_URL } from "../../../lib/constants";
@@ -18,6 +18,7 @@ import { useAtom } from "jotai";
 import { routesAtom } from "../../../lib/jotai/atoms";
 import AddRouteModal from "../../modals/routes/AddRouteModal";
 import DeleteRouteModal from "../../modals/routes/DeleteRouteModal";
+import EditRouteModal from "../../modals/routes/EditRouteModal";
 
 export default function ManageRoutes() {
   const [routes, setRoute] = useAtom(routesAtom);
@@ -53,7 +54,12 @@ export default function ManageRoutes() {
               <Th>Destination</Th>
               <Th>Fare</Th>
               <Th>Details</Th>
-              <Th>Remove</Th>
+              <Th>
+                <HStack spacing={5}>
+                  <Text>Edit</Text>
+                  <Text>Delete</Text>
+                </HStack>
+              </Th>
             </Tr>
           </Thead>
 
@@ -78,9 +84,10 @@ export default function ManageRoutes() {
                 </Td>
                 <Td>{route.description}</Td>
                 <Td>
-                  <Center>
+                  <HStack spacing={5}>
+                    <EditRouteModal routeToEdit={route} />
                     <DeleteRouteModal routeToRemove={route} />
-                  </Center>
+                  </HStack>
                 </Td>
               </Tr>
             ))}

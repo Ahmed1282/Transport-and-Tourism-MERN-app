@@ -14,6 +14,7 @@ import deleteDriver from "./routes/driver/deleteDriver.js";
 import addRoute from "./routes/routes/addRoute.js";
 import getRoute from "./routes/routes/getRoute.js";
 import deleteRoute from "./routes/routes/deleteRoute.js";
+import editRoute from "./routes/routes/editRoute.js";
 
 const app = express();
 const port = 3000;
@@ -38,6 +39,7 @@ app.use("/delete-driver/", deleteDriver);
 app.use("/add-route", addRoute);
 app.use("/get-routes", getRoute);
 app.use("/delete-route/", deleteRoute);
+app.use("/edit-route", editRoute);
 
 mongoose.connect(process.env.MONGO_URL);
 
