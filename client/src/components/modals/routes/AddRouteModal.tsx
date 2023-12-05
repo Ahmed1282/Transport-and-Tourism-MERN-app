@@ -45,12 +45,12 @@ export default function AddRouteModal({
       const newRoute: Route = { ...getValues(), code: generateCode() };
       await axios.post(`${BACKEND_URL}/add-route`, newRoute);
       // Update the routes list table
-      setRoutes([...routes, getValues()]);
+      setRoutes([...routes, newRoute]);
       toast({
         title: "Success!",
         description: "Route added successfully!",
         status: "success",
-        duration: 1500,
+        duration: 2000,
         isClosable: true,
       });
     } catch (e) {
