@@ -13,6 +13,7 @@ import {
   Spinner,
   useDisclosure,
   useToast,
+  Text,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { useAtom } from "jotai";
@@ -109,6 +110,9 @@ export default function AddRouteModal({
                 {...register("description", { required: "true" })}
               />
             </FormControl>
+            <Text mt={2} fontSize={"12px"} color="blackAlpha.600">
+              *The route ID is generated automatically{" "}
+            </Text>
           </ModalBody>
 
           <ModalFooter>
