@@ -11,6 +11,7 @@ import {
   Text,
   IconButton,
   Spinner,
+  useToast,
 } from "@chakra-ui/react";
 import axios from "axios";
 import { MdDelete } from "react-icons/md";
@@ -28,6 +29,43 @@ export default function DeleteVehicleModal({ vehicleToRemove }: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const setVehicles = useAtom(vehiclesAtom)[1];
   const [loading, setLoading] = useState(false);
+  const toast = useToast();
+
+  const onSubmit = async () => {
+    // Sending delete request to backend
+    const deleteVehicle = async () => {
+      setLoading(true);
+      try {
+        await axios.delete(
+          `${BACKEND_URL}/delete-vehicle/${vehicleToRemove.licensePlate}`
+        );
+
+        setVehicles((vehicles) =>
+          vehicles.filter((vehicle) => vehicle !== vehicleToRemove)
+        );
+        toast({
+          title: "Success!",
+          description: "Vehicle removed successfully!",
+          status: "success",
+          duration: 1500,
+          isClosable: true,
+        });
+      } catch (e) {
+        console.log(e);
+        toast({
+          title: "Oh No! 😥",
+          description: "Something went wrong! Unable to delete vehicle.",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+      }
+    };
+
+    await deleteVehicle();
+    setLoading(false);
+    onClose();
+  };
 
   return (
     <>
@@ -62,27 +100,9 @@ export default function DeleteVehicleModal({ vehicleToRemove }: Props) {
             </Button>
             <Button
               colorScheme="red"
-              onClick={async () => {
-                
-                // Sending delete request to backend
-                const deleteVehicle = async () => {
-                  setLoading(true);
-                  try {
-                    await axios.delete(
-                      `${BACKEND_URL}/delete-vehicle/${vehicleToRemove.licensePlate}`
-                    );
-
-                    setVehicles((vehicles) =>
-                      vehicles.filter((vehicle) => vehicle !== vehicleToRemove)
-                    );
-                  } catch (e) {
-                    console.log(e);
-                  }
-                };
-
-                await deleteVehicle();
-                setLoading(false);
-                onClose();
+              onClick={() => {
+                setLoading(true);
+                onSubmit();
               }}
             >
               {loading ? <Spinner /> : "Delete"}
