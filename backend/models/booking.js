@@ -11,7 +11,7 @@ const bookingSchema = new mongoose.Schema({
     enum: ['pending', 'confirmed', 'cancelled']    // Enum to restrict the status values
   },
   routeCode: { type: String, default: null },
-  fare: { type: number, default: null },    // Route Code, default is null
+  fare: { type: Number, default: null },    // Route Code, default is null
 });
 
 export default mongoose.model("Booking", bookingSchema);

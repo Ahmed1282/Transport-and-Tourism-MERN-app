@@ -16,6 +16,7 @@ import addRoute from "./routes/routes/addRoute.js";
 import getRoute from "./routes/routes/getRoute.js";
 import deleteRoute from "./routes/routes/deleteRoute.js";
 import editRoute from "./routes/routes/editRoute.js";
+import getBookings from "./routes/booking/getBookings.js";
 
 const app = express();
 const port = 3000;
@@ -42,6 +43,7 @@ app.use("/get-routes", getRoute);
 app.use("/delete-route/", deleteRoute);
 app.use("/edit-route", editRoute);
 app.use("/bookings", bookings);
+app.use("/get-bookings", getBookings);
 
 mongoose.connect(process.env.MONGO_URL);
 

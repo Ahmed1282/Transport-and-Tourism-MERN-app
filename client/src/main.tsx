@@ -9,6 +9,7 @@ import SignUpPage from "./components/pages/customer/SignUp";
 import LogInPage from "./components/pages/customer/LogIn";
 import HomePage from "./components/pages/customer/HomePage";
 import ManageDrivers from "./components/pages/admin/ManageDrivers";
+import ManageBookings from "./components/pages/admin/ManageBookings";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -42,7 +43,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <Routes>
           <Route
             path="/dashboard/manage-bookings"
-            element={<ManageRoutesPage />}
+            element={<ManageBookings />}
           />
         </Routes>
 
