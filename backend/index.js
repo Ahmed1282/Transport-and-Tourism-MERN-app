@@ -4,6 +4,9 @@ import cors from "cors";
 import "dotenv/config";
 
 import addRoute from "./routes/addRoute.js";
+import addVehicle from "./routes/vehicle/addVehicle.js";
+import getVehicles from "./routes/vehicle/getVehicles.js";
+import deleteVehicle from "./routes/vehicle/deleteVehicle.js";
 import signup from "./routes/signup.js";
 import login from "./routes/login.js";
 
@@ -19,8 +22,10 @@ app.use(
   })
 );
 
-
 app.use("/add-route", addRoute);
+app.use("/add-vehicle", addVehicle);
+app.use("/get-vehicles", getVehicles);
+app.use("/delete-vehicle/", deleteVehicle);
 app.use("/signup", signup);
 app.use("/login", login);
 
