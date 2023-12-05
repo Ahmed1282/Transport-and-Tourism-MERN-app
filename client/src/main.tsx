@@ -4,6 +4,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ManageRoutesPage from "./components/pages/admin/ManageRoutesPage";
 import Dashboard from "./components/pages/admin/Dashboard";
+import ManageVehicles from "./components/pages/admin/ManageVehicles";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -30,7 +31,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <Routes>
           <Route
             path="/dashboard/manage-vehicles"
-            element={<ManageRoutesPage />}
+            element={<ManageVehicles />}
           />
         </Routes>
 
