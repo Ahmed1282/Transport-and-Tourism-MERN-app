@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const bookingSchema = new mongoose.Schema({
-  date: { type: Date, required: true },            // Booking Date
+  date: { type: String, required: true },            // Booking Date
   time: { type: String, required: true },          // Booking Time
   origin: { type: String, required: true },        // Origin Location
   destination: { type: String, required: true },   // Destination Location

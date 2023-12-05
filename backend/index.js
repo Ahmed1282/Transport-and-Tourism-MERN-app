@@ -9,6 +9,7 @@ import getVehicles from "./routes/vehicle/getVehicles.js";
 import deleteVehicle from "./routes/vehicle/deleteVehicle.js";
 import signup from "./routes/signup.js";
 import login from "./routes/login.js";
+import bookings from "./routes/bookings.js";
 import addDriver from "./routes/driver/addDriver.js";
 import getDriver from "./routes/driver/getDrivers.js";
 import deleteDriver from "./routes/driver/deleteDriver.js";
@@ -34,6 +35,7 @@ app.use("/login", login);
 app.use("/add-driver", addDriver);
 app.use("/get-drivers", getDriver);
 app.use("/delete-driver/", deleteDriver);
+app.use("/bookings", bookings);
 
 mongoose.connect(process.env.MONGO_URL);
 
