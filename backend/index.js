@@ -4,6 +4,8 @@ import cors from "cors";
 import "dotenv/config";
 
 import addRoute from "./routes/addRoute.js";
+import signup from "./routes/signup.js";
+import login from "./routes/login.js";
 
 const app = express();
 const port = 3000;
@@ -19,6 +21,8 @@ app.use(
 
 
 app.use("/add-route", addRoute);
+app.use("/signup", signup);
+app.use("/login", login);
 
 mongoose.connect(process.env.MONGO_URL);
 
