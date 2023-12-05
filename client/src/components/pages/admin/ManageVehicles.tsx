@@ -8,18 +8,18 @@ import {
   Td,
   VStack,
   Heading,
-  IconButton,
   Center,
 } from "@chakra-ui/react";
-import AddVehicleModalButton from "../../modals/AddVehicleModalButton";
-import { useEffect, useState } from "react";
+import AddVehicleModal from "../../modals/AddVehicleModal";
+import { useEffect } from "react";
 import { BACKEND_URL } from "../../../lib/constants";
 import axios from "axios";
-import Vehicle from "../../../lib/types/vehicle";
-import { MdDelete } from "react-icons/md";
+import DeleteVehicleModal from "../../modals/DeleteVehicleModal";
+import { useAtom } from "jotai";
+import { vehiclesAtom } from "../../../lib/jotai/atoms";
 
 export default function ManageVehicles() {
-  const [vehicles, setVehicles] = useState<Vehicle[]>([]);
+  const [vehicles, setVehicles] = useAtom(vehiclesAtom);
 
   useEffect(() => {
     const getVehicles = async () => {
@@ -34,16 +34,15 @@ export default function ManageVehicles() {
     getVehicles().then((data) => setVehicles(data));
   }, []);
 
-  // console.log(vehicles)
-
-  if (vehicles.length == 0 || vehicles == undefined)
-    return <div>No Vehicles data available...</div>;
-
   return (
     <VStack mt={24} spacing={5}>
       <Heading>Vehicle Management</Heading>
-      <AddVehicleModalButton>Add Vehicle</AddVehicleModalButton>
-      <TableContainer mt={5} alignSelf={"left"}>
+      <AddVehicleModal>Add Vehicle</AddVehicleModal>
+      <TableContainer
+        mt={5}
+        alignSelf={"left"}
+        hidden={vehicles.length == 0 || vehicles == undefined ? true : false}
+      >
         <Table size="sm">
           <Thead>
             <Tr>
@@ -64,15 +63,7 @@ export default function ManageVehicles() {
                 <Td>{vehicle.licensePlate}</Td>
                 <Td>
                   <Center>
-                    <IconButton
-                      aria-label="Remove Vehicle"
-                      icon={<MdDelete />}
-                      size={"sm"}
-                      rounded={"full"}
-                      onClick={() => {
-                        // TODO Add Remove functionality
-                      }}
-                    />
+                    <DeleteVehicleModal vehicleToRemove={vehicle} />
                   </Center>
                 </Td>
               </Tr>

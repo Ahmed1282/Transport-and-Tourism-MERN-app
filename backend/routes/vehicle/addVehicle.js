@@ -3,7 +3,6 @@ import VehicleModel from "../../models/vehicle.js";
 const router = express.Router();
 
 router.post("/", async (req, res) => {
-  console.log(req.body);
   try {
     const newVehicle = new VehicleModel({
       ...req.body,
