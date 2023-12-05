@@ -5,6 +5,7 @@ import "dotenv/config";
 
 import addRoute from "./routes/addRoute.js";
 import addVehicle from "./routes/vehicle/addVehicle.js";
+import getVehicles from "./routes/vehicle/getVehicles.js";
 
 const app = express();
 const port = 3000;
@@ -20,6 +21,7 @@ app.use(
 
 app.use("/add-route", addRoute);
 app.use("/add-vehicle", addVehicle);
+app.use("/get-vehicles", getVehicles);
 
 mongoose.connect(process.env.MONGO_URL);
 
