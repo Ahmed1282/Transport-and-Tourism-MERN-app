@@ -9,6 +9,7 @@ import {
   VStack,
   Heading,
   Center,
+  Text,
 } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { BACKEND_URL } from "../../../lib/constants";
@@ -63,7 +64,18 @@ export default function ManageRoutes() {
                 <Td>{route.code}</Td>
                 <Td>{route.origin}</Td>
                 <Td>{route.destination}</Td>
-                <Td>{route.fare}</Td>
+                <Td>
+                  <Text>
+                    {Number(route.fare).toLocaleString("en-US")}{" "}
+                    <Text
+                      as={"span"}
+                      fontSize={"10px"}
+                      color={"blackAlpha.700"}
+                    >
+                      PKR
+                    </Text>
+                  </Text>
+                </Td>
                 <Td>{route.description}</Td>
                 <Td>
                   <Center>
