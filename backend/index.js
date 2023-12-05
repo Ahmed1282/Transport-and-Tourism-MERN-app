@@ -9,6 +9,9 @@ import getVehicles from "./routes/vehicle/getVehicles.js";
 import deleteVehicle from "./routes/vehicle/deleteVehicle.js";
 import signup from "./routes/signup.js";
 import login from "./routes/login.js";
+import addDriver from "./routes/driver/addDriver.js";
+import getDriver from "./routes/driver/getDrivers.js";
+import deleteDriver from "./routes/driver/deleteDriver.js";
 
 const app = express();
 const port = 3000;
@@ -28,6 +31,9 @@ app.use("/get-vehicles", getVehicles);
 app.use("/delete-vehicle/", deleteVehicle);
 app.use("/signup", signup);
 app.use("/login", login);
+app.use("/add-driver", addDriver);
+app.use("/get-drivers", getDriver);
+app.use("/delete-driver/", deleteDriver);
 
 mongoose.connect(process.env.MONGO_URL);
 

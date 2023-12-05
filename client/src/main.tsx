@@ -8,6 +8,7 @@ import ManageVehicles from "./components/pages/admin/ManageVehicles";
 import SignUpPage from "./components/pages/customer/SignUp";
 import LogInPage from "./components/pages/customer/LogIn";
 import HomePage from "./components/pages/customer/HomePage";
+import ManageDrivers from "./components/pages/admin/ManageDrivers";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -46,20 +47,17 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         </Routes>
 
         <Routes>
-          <Route
-            path="/dashboard/manage-drivers"
-            element={<ManageRoutesPage />}
-          />
-          <Route path="/manage-routes" element={<ManageRoutesPage />}/>
+          <Route path="/dashboard/manage-drivers" element={<ManageDrivers />} />
+          <Route path="/manage-routes" element={<ManageRoutesPage />} />
         </Routes>
         <Routes>
-          <Route path="/signup" element={<SignUpPage />}/>
+          <Route path="/signup" element={<SignUpPage />} />
         </Routes>
         <Routes>
-          <Route path="/login" element={<LogInPage />}/>
+          <Route path="/login" element={<LogInPage />} />
         </Routes>
         <Routes>
-          <Route path="/home" element={<HomePage />}/>
+          <Route path="/home" element={<HomePage />} />
         </Routes>
       </BrowserRouter>
     </ChakraProvider>
