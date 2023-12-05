@@ -4,7 +4,7 @@ import cors from "cors";
 import "dotenv/config";
 
 import addRoute from "./routes/addRoute.js";
-import addVehicle from "./routes/addVehicle.js";
+import addVehicle from "./routes/vehicle/addVehicle.js";
 
 const app = express();
 const port = 3000;
