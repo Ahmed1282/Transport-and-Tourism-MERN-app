@@ -3,7 +3,6 @@ import mongoose from "mongoose";
 import cors from "cors";
 import "dotenv/config";
 
-import addRoute from "./routes/addRoute.js";
 import addVehicle from "./routes/vehicle/addVehicle.js";
 import getVehicles from "./routes/vehicle/getVehicles.js";
 import deleteVehicle from "./routes/vehicle/deleteVehicle.js";
@@ -12,6 +11,9 @@ import login from "./routes/login.js";
 import addDriver from "./routes/driver/addDriver.js";
 import getDriver from "./routes/driver/getDrivers.js";
 import deleteDriver from "./routes/driver/deleteDriver.js";
+import addRoute from "./routes/routes/addRoute.js";
+import getRoute from "./routes/routes/getRoute.js";
+import deleteRoute from "./routes/routes/deleteRoute.js";
 
 const app = express();
 const port = 3000;
@@ -25,7 +27,6 @@ app.use(
   })
 );
 
-app.use("/add-route", addRoute);
 app.use("/add-vehicle", addVehicle);
 app.use("/get-vehicles", getVehicles);
 app.use("/delete-vehicle/", deleteVehicle);
@@ -34,6 +35,9 @@ app.use("/login", login);
 app.use("/add-driver", addDriver);
 app.use("/get-drivers", getDriver);
 app.use("/delete-driver/", deleteDriver);
+app.use("/add-route", addRoute);
+app.use("/get-routes", getRoute);
+app.use("/delete-route/", deleteRoute);
 
 mongoose.connect(process.env.MONGO_URL);
 
