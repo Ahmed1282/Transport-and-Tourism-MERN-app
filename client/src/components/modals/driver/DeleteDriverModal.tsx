@@ -15,11 +15,11 @@ import {
 } from "@chakra-ui/react";
 import axios from "axios";
 import { MdDelete } from "react-icons/md";
-import { BACKEND_URL } from "../../lib/constants";
-import { driversAtom } from "../../lib/jotai/atoms";
+import { BACKEND_URL } from "../../../lib/constants";
+import { driversAtom } from "../../../lib/jotai/atoms";
 import { useAtom } from "jotai";
 import { useState } from "react";
-import Driver from "../../lib/types/Driver";
+import Driver from "../../../lib/types/Driver";
 
 interface Props {
   driverToRemove: Driver;

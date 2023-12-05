@@ -15,19 +15,19 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
-import Vehicle from "../../lib/types/vehicle";
 import { useAtom } from "jotai";
-import { vehiclesAtom } from "../../lib/jotai/atoms";
+import { driversAtom } from "../../../lib/jotai/atoms";
 import { useState } from "react";
 import axios from "axios";
-import { BACKEND_URL } from "../../lib/constants";
+import { BACKEND_URL } from "../../../lib/constants";
+import Driver from "../../../lib/types/Driver";
 
-export default function AddVehicleModal({
+export default function AddDriverModal({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const [vehicles, setVehicles] = useAtom(vehiclesAtom);
+  const [drivers, setDrivers] = useAtom(driversAtom);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [loading, setLoading] = useState(false);
   const toast = useToast();
@@ -36,16 +36,16 @@ export default function AddVehicleModal({
     register,
     getValues,
     formState: { isValid },
-  } = useForm<Vehicle>();
+  } = useForm<Driver>();
 
   const onSubmit = async () => {
     try {
-      await axios.post(`${BACKEND_URL}/add-vehicle`, getValues());
+      await axios.post(`${BACKEND_URL}/add-driver`, getValues());
       // Update the vehicles list table
-      setVehicles([...vehicles, getValues()]);
+      setDrivers([...drivers, getValues()]);
       toast({
         title: "Success!",
-        description: "Vehicle added successfully!",
+        description: "Driver added successfully!",
         status: "success",
         duration: 1500,
         isClosable: true,
@@ -53,7 +53,7 @@ export default function AddVehicleModal({
     } catch (e) {
       toast({
         title: "Oh No! 😥",
-        description: "Vehicle with this this license plate already exists.",
+        description: "Driver with this this license plate already exists.",
         status: "error",
         duration: 3000,
         isClosable: true,
@@ -72,31 +72,41 @@ export default function AddVehicleModal({
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Add New Vehicle</ModalHeader>
+          <ModalHeader>Add New Driver</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
             <FormControl>
               <FormLabel>Name</FormLabel>
               <Input
-                placeholder="Toyota Coaster"
+                placeholder="Bilal Ahmad"
                 {...register("name", { required: "true" })}
               />
             </FormControl>
 
             <FormControl mt={4}>
-              <FormLabel>License Plate</FormLabel>
+              <FormLabel>License Number</FormLabel>
               <Input
-                placeholder="LEZ-152"
-                {...register("licensePlate", { required: "true" })}
+                type="text"
+                placeholder="LEZASDWASSS!"
+                {...register("licenseNumber", { required: "true" })}
               />
             </FormControl>
 
             <FormControl mt={4}>
-              <FormLabel>Capacity</FormLabel>
+              <FormLabel>Phone Number</FormLabel>
               <Input
                 type="number"
-                placeholder="25"
-                {...register("capacity", { required: "true" })}
+                placeholder="03449856523"
+                {...register("phone", { required: "true" })}
+              />
+            </FormControl>
+
+            <FormControl mt={4}>
+              <FormLabel>Date Joined</FormLabel>
+              <Input
+                type="date"
+                placeholder="25-03-2021"
+                {...register("dateJoined", { required: "true" })}
               />
             </FormControl>
           </ModalBody>

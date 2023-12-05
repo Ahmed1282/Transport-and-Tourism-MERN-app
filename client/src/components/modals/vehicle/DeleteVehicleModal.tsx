@@ -15,9 +15,9 @@ import {
 } from "@chakra-ui/react";
 import axios from "axios";
 import { MdDelete } from "react-icons/md";
-import { BACKEND_URL } from "../../lib/constants";
-import Vehicle from "../../lib/types/vehicle";
-import { vehiclesAtom } from "../../lib/jotai/atoms";
+import { BACKEND_URL } from "../../../lib/constants";
+import Vehicle from "../../../lib/types/vehicle";
+import { vehiclesAtom } from "../../../lib/jotai/atoms";
 import { useAtom } from "jotai";
 import { useState } from "react";
 

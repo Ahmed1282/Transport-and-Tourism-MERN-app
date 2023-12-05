@@ -10,11 +10,11 @@ import {
   Heading,
   Center,
 } from "@chakra-ui/react";
-import AddVehicleModal from "../../modals/AddVehicleModal";
+import AddVehicleModal from "../../modals/vehicle/AddVehicleModal";
 import { useEffect } from "react";
 import { BACKEND_URL } from "../../../lib/constants";
 import axios from "axios";
-import DeleteVehicleModal from "../../modals/DeleteVehicleModal";
+import DeleteVehicleModal from "../../modals/vehicle/DeleteVehicleModal";
 import { useAtom } from "jotai";
 import { vehiclesAtom } from "../../../lib/jotai/atoms";
 

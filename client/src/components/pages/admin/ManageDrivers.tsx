@@ -16,10 +16,10 @@ import { BACKEND_URL } from "../../../lib/constants";
 import axios from "axios";
 import { useAtom } from "jotai";
 import { driversAtom } from "../../../lib/jotai/atoms";
-import AddDriverModal from "../../modals/AddDriverModal";
+import AddDriverModal from "../../modals/driver/AddDriverModal";
 import { GiCheckMark } from "react-icons/gi";
 import { RxCross2 } from "react-icons/rx";
-import DeleteDriverModal from "../../modals/DeleteDriverModal";
+import DeleteDriverModal from "../../modals/driver/DeleteDriverModal";
 
 export default function ManageDrivers() {
   const [drivers, setDrivers] = useAtom(driversAtom);
