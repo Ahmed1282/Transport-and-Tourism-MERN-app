@@ -13,8 +13,8 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
-import Vehicle from "../../../lib/types/vehicle";
-import addVehicle from "../../../lib/queries/post/addVehicle";
+import Vehicle from "../../lib/types/vehicle";
+import addVehicle from "../../lib/queries/post/addVehicle";
 
 export default function AddVehicleModalButton({
   children,
