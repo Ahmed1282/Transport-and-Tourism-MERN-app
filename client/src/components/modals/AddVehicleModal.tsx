@@ -43,10 +43,17 @@ export default function AddVehicleModal({
       await axios.post(`${BACKEND_URL}/add-vehicle`, getValues());
       // Update the vehicles list table
       setVehicles([...vehicles, getValues()]);
+      toast({
+        title: "Success!",
+        description: "Vehicle added successfully!",
+        status: "success",
+        duration: 1500,
+        isClosable: true,
+      });
     } catch (e) {
       toast({
-        title: "Failed to add vehicle",
-        description: "Car with this this license plate already exists.",
+        title: "Oh No! 😥",
+        description: "Vehicle with this this license plate already exists.",
         status: "error",
         duration: 3000,
         isClosable: true,
