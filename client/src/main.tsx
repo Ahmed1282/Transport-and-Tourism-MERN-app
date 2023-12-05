@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { ChakraProvider } from "@chakra-ui/react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import ManageRoutesPage from "./components/pages/admin/ManageRoutesPage";
+import ManageRoutesPage from "./components/pages/admin/ManageRoutes";
 import Dashboard from "./components/pages/admin/Dashboard";
 import ManageVehicles from "./components/pages/admin/ManageVehicles";
 import SignUpPage from "./components/pages/customer/SignUp";
