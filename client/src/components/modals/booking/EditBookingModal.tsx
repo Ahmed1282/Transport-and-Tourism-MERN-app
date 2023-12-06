@@ -15,6 +15,8 @@ import {
   FormLabel,
   Input,
   Select,
+  HStack,
+  Text,
 } from "@chakra-ui/react";
 import axios from "axios";
 import { MdEdit } from "react-icons/md";
@@ -36,9 +38,11 @@ export default function EditBookingModal({ bookingToEdit }: Props) {
   const [drivers, setDrivers] = useAtom(driversAtom);
   const [loading, setLoading] = useState(false);
 
+  const [distance, setDistance] = useState(0);
+  const [fuelPrice, setFuelPrice] = useState(0);
+
   const toast = useToast();
   const {
-    register,
     getValues,
     reset,
     setValue,
@@ -54,6 +58,7 @@ export default function EditBookingModal({ bookingToEdit }: Props) {
       const selectedDriver = getValues().driver;
       const updatedBooking: Booking = {
         ...getValues(),
+        fare: Number(calculateFare(distance, fuelPrice)),
         _id: bookingToEdit._id,
         driver: {
           // Only add the name and license number of the driver
@@ -130,14 +135,43 @@ export default function EditBookingModal({ bookingToEdit }: Props) {
           <ModalHeader>Edit Booking</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
-            <FormControl>
-              <FormLabel>Fare</FormLabel>
-              <Input
-                type="number"
-                placeholder="25000 PKR"
-                {...register("fare", { required: "true" })}
-              />
-            </FormControl>
+            <HStack>
+              <FormControl>
+                <FormLabel>Distance (KM)</FormLabel>
+                <Input
+                  type="number"
+                  placeholder="25000 PKR"
+                  value={distance}
+                  onChange={(e) => setDistance(Number(e.target.value))}
+                />
+              </FormControl>
+              <FormControl>
+                <FormLabel>Fuel Price (RPS)</FormLabel>
+                <Input
+                  type="number"
+                  placeholder="25000 PKR"
+                  defaultValue={500}
+                  value={fuelPrice}
+                  onChange={(e) => setFuelPrice(Number(e.target.value))}
+                />
+              </FormControl>
+            </HStack>
+
+            <Text
+              mt={2}
+              border={"1px solid"}
+              rounded={"md"}
+              padding={2}
+              borderColor={"blackAlpha.300"}
+            >
+              Fare:{" "}
+              <Text as={"span"} fontWeight={"bold"} color={"green"}>
+                {calculateFare(distance, fuelPrice)}
+              </Text>{" "}
+              <Text as={"span"} color={"blackAlpha.700"} fontSize={"12px"}>
+                PKR{" "}
+              </Text>
+            </Text>
 
             <FormControl mt={4}>
               <FormLabel>Driver</FormLabel>
@@ -210,3 +244,8 @@ export default function EditBookingModal({ bookingToEdit }: Props) {
     </>
   );
 }
+
+const calculateFare = (distance: number, fuelPrice: number) => {
+  const VEHICLE_AVG = 13;
+  return ((distance / VEHICLE_AVG) * fuelPrice).toFixed(2);
+};
