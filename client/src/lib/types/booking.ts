@@ -1,9 +1,13 @@
+import Driver from "./Driver";
+
 export default interface Booking {
+  _id?: string;
   date: string;
   time: string;
   origin: string;
   destination: string;
-  status: "pending" | "confirmed" | "cancelled";
-  routeCode: string;
-  fare: number;
+  status: "Pending" | "Confirmed" | "Cancelled";
+  routeCode?: string;
+  fare?: number;
+  driver?: Driver;
 }

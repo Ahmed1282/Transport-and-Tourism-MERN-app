@@ -1,7 +1,7 @@
-export default interface Vehicle {
+export default interface Driver {
   name: string;
-  phone: number;
   licenseNumber: string;
-  dateJoined: string;
-  isBooked: boolean;
+  phone?: number;
+  dateJoined?: string;
+  isBooked?: boolean;
 }
