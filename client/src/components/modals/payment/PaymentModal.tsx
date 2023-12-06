@@ -38,7 +38,7 @@ export default function PaymentModal({ booking }: Props) {
         colorScheme="blue"
         onClick={onOpen}
         isDisabled={
-          (booking.status === "Confirmed" ? false : true) ||
+          (booking?.status === "Confirmed" ? false : true) ||
           (paymentStatus === "paid" ? true : false)
         }
       >
@@ -47,7 +47,7 @@ export default function PaymentModal({ booking }: Props) {
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Ride Fare: {booking.fare}</ModalHeader>
+          <ModalHeader>Ride Fare: {booking?.fare}</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <FormControl isRequired>

@@ -71,6 +71,7 @@ const HomePage: React.FC = () => {
 
   const onSubmit = async () => {
     const finalBooking: Booking = getValues();
+    finalBooking.customerEmail = user.email;
 
     if (isPredefinedRoute) {
       // Add relevant route into booking object
@@ -78,7 +79,6 @@ const HomePage: React.FC = () => {
 
       finalBooking.origin = chosenRoute.origin;
       finalBooking.destination = chosenRoute.destination;
-      finalBooking.customerEmail = user.email;
       finalBooking.routeCode = chosenRoute.code;
       finalBooking.fare = chosenRoute.fare;
 
@@ -105,6 +105,7 @@ const HomePage: React.FC = () => {
       const res = await axios.get(`${BACKEND_URL}/get-booking/${user.email}`);
       setBooking(res.data);
       reset(booking);
+      console.log(booking);
     } catch (e) {
       console.error("Error fetching routes:", e);
       alert("Error: Failed to fetch your bookings.");
@@ -214,11 +215,11 @@ const HomePage: React.FC = () => {
 
         <Box>
           <Text fontWeight={"bold"}>Booking Status</Text>
-          <Text>{booking.status}</Text>
+          <Text>{booking?.status}</Text>
         </Box>
         <Box>
           <Text fontWeight={"bold"}>Fare </Text>
-          <Text>{!booking.fare ? "-" : booking.fare} </Text>
+          <Text>{!booking?.fare ? "-" : booking.fare} </Text>
         </Box>
 
         <Box>
