@@ -8,31 +8,44 @@ import {
   Td,
   VStack,
   Heading,
+  Text,
   Center,
 } from "@chakra-ui/react";
-import AddVehicleModal from "../../modals/vehicle/AddVehicleModal";
 import { useEffect } from "react";
 import { BACKEND_URL } from "../../../lib/constants";
 import axios from "axios";
-import DeleteVehicleModal from "../../modals/vehicle/DeleteVehicleModal";
 import { useAtom } from "jotai";
-import { vehiclesAtom } from "../../../lib/jotai/atoms";
+import { bookingsAtom, driversAtom } from "../../../lib/jotai/atoms";
+import EditBookingModal from "../../modals/booking/EditBookingModal";
 
-export default function ManageBookings() {
-  const [vehicles, setVehicles] = useAtom(vehiclesAtom);
+export default function AddDriverModal() {
+  const [bookings, setBookings] = useAtom(bookingsAtom);
+  const setDrivers = useAtom(driversAtom)[1];
 
-  // useEffect(() => {
-  //   const getVehicles = async () => {
-  //     try {
-  //       const response = await axios.get(`${BACKEND_URL}/get-vehicles`);
-  //       return response.data;
-  //     } catch (e) {
-  //       console.log(e);
-  //     }
-  //   };
+  useEffect(() => {
+    // Fetching all bookings
+    const getBookings = async () => {
+      try {
+        const response = await axios.get(`${BACKEND_URL}/get-bookings`);
+        return response.data;
+      } catch (e) {
+        console.log(e);
+      }
+    };
 
-  //   getVehicles().then((data) => setVehicles(data));
-  // }, []);
+    // Fetching all drivers
+    const getDrivers = async () => {
+      try {
+        const response = await axios.get(`${BACKEND_URL}/get-drivers`);
+        return response.data;
+      } catch (e) {
+        console.log(e);
+      }
+    };
+
+    getBookings().then((data) => setBookings(data));
+    getDrivers().then((data) => setDrivers(data));
+  }, []);
 
   return (
     <VStack mt={24} spacing={5}>
@@ -40,29 +53,50 @@ export default function ManageBookings() {
       <TableContainer
         mt={5}
         alignSelf={"left"}
-        hidden={vehicles.length == 0 || vehicles == undefined ? true : false}
+        hidden={bookings.length == 0 || bookings == undefined ? true : false}
+        overflowY="auto"
+        maxHeight="500px"
       >
         <Table size="sm">
           <Thead>
             <Tr>
               <Th>#</Th>
-              <Th>Name</Th>
-              <Th isNumeric>Capacity</Th>
-              <Th>LICENSE PLATE</Th>
-              <Th>Remove</Th>
+              <Th>Date</Th>
+              <Th>Origin</Th>
+              <Th>Destination</Th>
+              <Th>Route</Th>
+              <Th>Fare</Th>
+              <Th>Driver</Th>
+              <Th>Status</Th>
+              <Th>Update</Th>
             </Tr>
           </Thead>
 
           <Tbody>
-            {vehicles.map((vehicle, index) => (
+            {bookings.map((booking, index) => (
               <Tr key={index}>
                 <Td>{index + 1}</Td>
-                <Td>{vehicle.name}</Td>
-                <Td isNumeric>{vehicle.capacity}</Td>
-                <Td>{vehicle.licensePlate}</Td>
+                <Td>{booking.date}</Td>
+                <Td>{booking.origin}</Td>
+                <Td>{booking.destination}</Td>
+                <Td>{booking.routeCode == null ? "-" : booking.routeCode}</Td>
+                <Td>
+                  {booking.fare == null || booking.fare == 0
+                    ? "-"
+                    : CustomizedFare(booking?.fare)}
+                </Td>
+                <Td>
+                  {booking.driver == null ? (
+                    // <AddDriverModal />
+                    "-"
+                  ) : (
+                    <Text>{booking.driver.name}</Text>
+                  )}
+                </Td>
+                <Td>{CustomizedStatus(booking.status)}</Td>
                 <Td>
                   <Center>
-                    <DeleteVehicleModal vehicleToRemove={vehicle} />
+                    <EditBookingModal bookingToEdit={booking} />
                   </Center>
                 </Td>
               </Tr>
@@ -71,5 +105,31 @@ export default function ManageBookings() {
         </Table>
       </TableContainer>
     </VStack>
+  );
+}
+
+function CustomizedStatus(status: string) {
+  const textColor = {
+    Pending: "orange",
+    Confirmed: "green",
+    Cancelled: "red",
+  };
+
+  return (
+    // @ts-expect-error status type is fixed in schema already
+    <Text fontSize={"10px"} fontWeight={"bold"} color={textColor[status]}>
+      {status.toUpperCase()}
+    </Text>
+  );
+}
+
+function CustomizedFare(fare: number) {
+  return (
+    <Text fontWeight={"semibold"}>
+      {Number(fare).toLocaleString()}{" "}
+      <Text as={"span"} fontSize={"10px"} color={"blackAlpha.700"}>
+        PKR
+      </Text>
+    </Text>
   );
 }

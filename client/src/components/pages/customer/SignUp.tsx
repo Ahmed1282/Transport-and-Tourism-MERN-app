@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link as RouterLink } from 'react-router-dom'; // Corrected import
 import {
   Container,
   FormControl,
@@ -13,7 +13,13 @@ import {
   VStack,
   Center,
   InputGroup,
-  InputRightElement
+  InputRightElement,
+  Checkbox,
+  Link, // Chakra UI Link
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  CloseButton
 } from '@chakra-ui/react';
 
 const SimpleSignUp = () => {
@@ -194,6 +200,7 @@ const SimpleSignUp = () => {
               >
                 Sign up
               </Button>
+              <p>Already have an account? <RouterLink to="/login">Log In</RouterLink></p>
             </VStack>
           </VStack>
         </Stack>

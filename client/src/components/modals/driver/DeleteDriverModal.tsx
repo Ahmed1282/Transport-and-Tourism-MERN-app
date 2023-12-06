@@ -76,6 +76,7 @@ export default function DeleteVehicleModal({
         icon={<MdDelete />}
         size={"sm"}
         rounded={"full"}
+        isDisabled={driverToRemove.isBooked ? true : false}
         onClick={onOpen}
       />
 

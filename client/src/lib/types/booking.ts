@@ -10,4 +10,5 @@ export default interface Booking {
   routeCode?: string;
   fare?: number;
   driver?: Driver;
+  customerEmail?: string;
 }

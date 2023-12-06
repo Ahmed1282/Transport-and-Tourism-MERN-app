@@ -7,7 +7,7 @@ router.post("/", async (req, res) => {
     console.log(req.body);
     const newBooking = new BookingModel({
       ...req.body,
-      status: 'pending' // Setting the initial status to 'pending'
+      status: "Pending", // Setting the initial status to 'pending'
     });
 
     await newBooking.save();

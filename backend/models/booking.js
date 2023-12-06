@@ -13,6 +13,7 @@ const bookingSchema = new mongoose.Schema({
   routeCode: { type: String, default: null },
   fare: { type: Number, default: null }, // Route Code, default is null
   driver: { type: Object, default: null },
+  customerEmail: { type: String, default: null },
 });
 
 export default mongoose.model("Booking", bookingSchema);
